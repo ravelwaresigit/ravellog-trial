@@ -1,0 +1,11 @@
+#fixed {
+	background: #222D31;
+	min-height: 100vh;
+}
+.content {
+	padding-top: 25vh;
+}
+
+.panel-heading {
+	font-size: 20px;
+}
