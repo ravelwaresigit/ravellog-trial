@@ -1,0 +1,27 @@
+Untuk Ravellog Trial V2 : Matrix Kanban
+
+[{
+"event":"TAG_READ",
+"path":"'/gate/trialv2'",
+"body":"
+ var body='{';
+
+ body+='\"tags\": [';
+
+ for(i=0;i<ctx_tags.length;i++)
+ {
+ 
+ body+='\"'+ctx_tags[i].getEPC()+'\"';
+ if(i< ctx_tags.length - 1){
+ body+=',';
+ }
+ }
+
+ body+=']';
+ body+='}';
+"
+}]
+
+Untuk Ravellog Trial V1 : Bukan Matrix Kanban
+
+'/gate/trialv2' diganti dengan '/gate/trialv1'
