@@ -8,6 +8,7 @@ use App\v2\tag_v2;
 use App\v2\read_logs_v2;
 use Session;
 use Illuminate\Support\Facades\Input;
+use DB;
 
 class V2Controller extends Controller
 {
@@ -96,8 +97,34 @@ class V2Controller extends Controller
             }
 
         } 
-    }   
+    }
+    public function Matrix(){
+        return view('v2.creatematrix');
+    }
+    public function createMatrix(Request $request){
+        $x = $request->x;
+        $y = $request->y;
+        $z = $request->z;
 
+        if($x > 0 & $y > 0 & $z > 0){
+            $notification = array('title'=> 'Pembuatan Matrix Berhasil!','msg'=>'Data Matrix berhasil disimpan!','alert-type'=>'success');
+            tag_v2::truncate();
+            for ($i=1; $i <= $z; $i++) { 
+                for ($j=1; $j <= $y; $j++) { 
+                    for ($k=1; $k <= $x; $k++) { 
+                        tag_v2::create([
+                            'x' => $k,
+                            'y' => $j,
+                            'z' => $i
+                        ]);
+                    }
+                }
+            };
+        }else{
+            $notification = array('title'=> 'Gagal!','msg'=>'Nilai x, y, atau z tidak boleh kurang dari 0 atau kosong','alert-type'=>'error');
+        };
+        return redirect()->back()->with($notification);
+    }
     public function getMatrix()
     {
         $matrixset = matrix::where('id','1')->first();
@@ -170,7 +197,7 @@ class V2Controller extends Controller
         $matrix_terpilih = tag_v2::where('epc', $kanban)->first();
         $matrix = tag_v2::where([['x', $x],['y',$y],['z',$z]])->first();
         // $savedkanban = tag_v2::whereNotNull('epc')->pluck('epc')->toArray();
-        $savedkanbans = tag_v2::whereNotIn('id_tag', [$matrix->id_tag])->get();
+        $savedkanbans = tag_v2::whereNotIn('id', [$matrix->id])->get();
         foreach ($savedkanbans as $savedkanbanss) {
             $savedkanban[] = $savedkanbanss->epc;
         }
@@ -185,5 +212,10 @@ class V2Controller extends Controller
         }else{
             return ['epc kosong'];
         };
+    }
+    public function resetKanban(){
+        tag_v2::whereNotNull('epc')->update(['epc' => null]);
+        $notification = array('title'=> 'Reset Berhasil!','msg'=>'Data Kanban berhasil direset!','alert-type'=>'success');
+        return redirect()->back()->with($notification);
     }
 }

@@ -30,6 +30,8 @@ Route::get('/v1/getresult','V1Controller@getResult');
 //Trial v2
 Route::get('/v2/setmatrix','V2Controller@setMatrix')->name('v2');
 Route::post('/v2/storematrix','V2Controller@storeMatrix')->name('storematrix');
+Route::get('/v2/matrix','V2Controller@Matrix')->name('matrix');
+Route::post('/v2/creatematrix','V2Controller@createMatrix')->name('creatematrix');
 Route::get('/v2/setkanban','V2Controller@setKanban')->name('setkanban');
 Route::post('/v2/storekanban','V2Controller@storeKanban')->name('storekanban');
 Route::get('/v2/result','V2Controller@showResult')->name('resultv2');
@@ -39,3 +41,4 @@ Route::get('/v2/getmatrix','V2Controller@getMatrix')->name('getmatrix');
 Route::post('/v2/updatematrix','V2Controller@updateMatrix')->name('updatematrix');
 Route::post('/v2/settrialnumber','V2Controller@setTrialNumber');
 Route::post('/v2/checkduplicatekanban','V2Controller@checkDuplicateKanban');
+Route::get('/v2/resetkanban','V2Controller@resetKanban')->name('resetkanban');

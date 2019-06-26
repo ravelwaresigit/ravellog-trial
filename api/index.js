@@ -49,6 +49,7 @@ var server = http.createServer( async function (req, res) {
         }
     }
     else{
+        console.log('GET');
         res.write('200');
         res.end();
     }

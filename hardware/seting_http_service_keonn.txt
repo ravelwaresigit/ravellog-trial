@@ -25,3 +25,31 @@ Untuk Ravellog Trial V2 : Matrix Kanban
 Untuk Ravellog Trial V1 : Bukan Matrix Kanban
 
 '/gate/trialv2' diganti dengan '/gate/trialv1'
+
+untuk Ravellog Versi port 1 dan port 2
+
+[{
+"event":"TAG_READ",
+"path":"'/gate/1'",
+"body":"
+ var body='{';
+ body+='\"ip\":\"'+'x'+'\",';
+ body+='\"tags\":[';
+
+ for(i=0;i<ctx_tags.length;i++)
+ {
+ 
+ body+='{';
+ body+='\"port\": \"'+ctx_tags[i].getAntenna()+'\",';
+ body+='\"epc\": \"'+ctx_tags[i].getEPC()+'\",';
+ body+='}';
+
+ if(i<ctx_tags.length - 1){
+ body+=',';
+ }
+ }
+
+ body+=']';
+ body+='}';
+"
+}]

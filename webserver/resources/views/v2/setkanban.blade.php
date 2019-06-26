@@ -12,6 +12,9 @@
 		</ul>
 		</small>
 	</legend>
+	<form method="GET" class="form-horizontal" action="{{route('resetkanban')}}">
+		<button type="submit" title="Klik untuk menghapus data epc pada matriks" class="btn btn-success">RESET DATA KANBAN</button>
+	</form>
 	<h5><b>Masukkan 3 digit terakhir dari epc rfid tag</b></h5>
 	@if (Session::has('message'))
       <div class="alert alert-success">{{ Session::get('message') }}</div>
@@ -20,7 +23,17 @@
 	<form method="POST" class="form-horizontal" action="{{route('storekanban')}}">
 	<div class="row">
 		@for ($a=1; $a <= $matrix->z ; $a++)
-		<div class="col-sm-6">
+		<?php
+			if($matrix->x <= 2){
+				echo '<div class="col-sm-2">';
+			}elseif($matrix->x <= 4){
+				echo '<div class="col-sm-4">';
+			}elseif($matrix->x <= 6){
+				echo '<div class="col-sm-6">';
+			}else{
+				echo '<div class="col-sm-12">';
+			};
+		?>
 			<label>Layer {{$a}}</label>
 			<div class="panel panel-default" style="box-shadow: 0 3px 5px #777">
 				<div class="panel-body">
@@ -28,9 +41,22 @@
 					@for($b=1; $b <= $matrix->y ; $b++)  
 					<div class="row">
 						@for($c=1; $c <= $matrix->x ; $c++) 
-						<?php $kanban = 'kanban'.$c.$b.$a;
+						<?php
+							$kanban = 'kanban'.$c.$b.$a;
+							if($matrix->x == 1){
+								echo '<div class="col-sm-12">';
+							}elseif($matrix->x == 2){
+								echo '<div class="col-sm-6">';
+							}elseif($matrix->x == 3){
+								echo '<div class="col-sm-4">';
+							}elseif($matrix->x <= 4){
+								echo '<div class="col-sm-3">';
+							}elseif($matrix->x <= 6){
+								echo '<div class="col-sm-2">';
+							}else{
+								echo '<div class="col-sm-1">';
+							};
 						?>
-						<div class="col-md-2">
 							@foreach($readkanbans as $readkanban)
 								@if($readkanban->x == $c && $readkanban->y == $b && $readkanban->z == $a)
 									@if($readkanban->epc != null)
@@ -58,6 +84,9 @@
 <!--======================================== end of content ======================================== -->
 {{csrf_field()}}
 <script type="text/javascript">
+	@if(Session::has('msg'))
+      swal("{{ Session::get('title')}}","{{ Session::get('msg')}}","{{ Session::get('alert-type')}}");
+    @endif
 	// onblur from event, check ada redundand kanban atau tidak
 	function isDuplicate(data){
 		var x = $('[name="'+data+'"]').attr("data-x")

@@ -39,7 +39,7 @@
 				ID = setInterval(function(){
 					$('#result').load('/v2/getresult');
 					//console.log('interval');
-				},3000);
+				},1000);
 				swal({
 	              title: 'Ravellog is Ready!',
 	              text: 'Lewatkan Kanban pada Smart Gate System',

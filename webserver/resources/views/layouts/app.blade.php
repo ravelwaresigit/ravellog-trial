@@ -22,6 +22,7 @@
     <link href="{{ asset('css/bootstrap-multiselect.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/sweetalert.css')}}">
+
     <!-- jQuery -->
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.js') }}"></script>
@@ -78,18 +79,6 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
-    </script>
-    <script type='text/javascript'>
-      $( function() {
-        $( "#datepicker1,#datepicker2,#datepicker3,#datepicker4" ).datepicker({ dateFormat: 'yy-mm-dd' });
-      } );
-      $(document).ready(function() {
-        $("#multiselect").multiselect({
-            buttonWidth: '100%'
-        });
-        $(".caret").css('float', 'right');
-        $(".caret").css('margin', '8px 0'); 
-      } );
     </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -184,7 +173,6 @@
     </div>
     <!-- /#wrapper -->
 
-
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
@@ -214,7 +202,6 @@
     </script>
 
 </body>
-
 
 
 </html>

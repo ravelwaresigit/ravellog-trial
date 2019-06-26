@@ -35,6 +35,9 @@
 										<option value="4" @if($matrixset->x == '4') selected="" @endif>4</option>
 										<option value="5" @if($matrixset->x == '5') selected="" @endif>5</option>
 										<option value="6" @if($matrixset->x == '6') selected="" @endif>6</option>
+										<option value="7" @if($matrixset->x == '7') selected="" @endif>7</option>
+										<option value="8" @if($matrixset->x == '8') selected="" @endif>8</option>
+										<option value="9" @if($matrixset->x == '9') selected="" @endif>9</option>
 									</select>
 								</div>
 							</div>
@@ -50,6 +53,9 @@
 										<option value="4" @if($matrixset->y == '4') selected="" @endif>4</option>
 										<option value="5" @if($matrixset->y == '5') selected="" @endif>5</option>
 										<option value="6" @if($matrixset->y == '6') selected="" @endif>6</option>
+										<option value="7" @if($matrixset->y == '7') selected="" @endif>7</option>
+										<option value="8" @if($matrixset->y == '8') selected="" @endif>8</option>
+										<option value="9" @if($matrixset->y == '9') selected="" @endif>9</option>
 									</select>
 								</div>
 							</div>
@@ -65,6 +71,9 @@
 										<option value="4" @if($matrixset->z == '4') selected="" @endif>4</option>
 										<option value="5" @if($matrixset->z == '5') selected="" @endif>5</option>
 										<option value="6" @if($matrixset->z == '6') selected="" @endif>6</option>
+										<option value="7" @if($matrixset->z == '7') selected="" @endif>7</option>
+										<option value="8" @if($matrixset->z == '8') selected="" @endif>8</option>
+										<option value="9" @if($matrixset->z == '9') selected="" @endif>9</option>
 									</select>
 								</div>
 							</div>

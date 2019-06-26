@@ -29,7 +29,7 @@
                 <a href="{{route('v2')}}">
                     <div class="panel panel-1" style="background-color: #2b235a; color: white;">
                         <div class="panel-heading">
-                            <h2 style="text-align: center">Trial V2</h2>
+                            <h2 style="text-align: center">Trial V2 (Matrix Kanban)</h2>
                             <p style="text-align: center"></p>
                         </div>
                     </div>

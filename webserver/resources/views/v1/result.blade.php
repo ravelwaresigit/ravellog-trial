@@ -10,7 +10,7 @@
     var refreshId = setInterval(function()
     {
         $('#readkanban').load('/v1/getresult');
-    }, 2000);
+    }, 1000);
 </script>
 </div>
 @endsection
