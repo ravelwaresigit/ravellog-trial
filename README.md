@@ -23,4 +23,6 @@ ketik di cmd: npm install
 3. screenshoot
 4. setinterval 1 detik -> done
 5. yang engga kebaca tampilin nilai epcnya -> done
-6. bug di submit epc yang duplicate
+6. bug di submit epc yang duplicate (pending)
+7. data dari keonn include ip, port antenna
+8. cukup 1 url untuk semua jenis trial (pending)

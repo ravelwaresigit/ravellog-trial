@@ -5,7 +5,8 @@
 <div id="body-content-wrapper">
     <div class="container-fluid" style="margin-top: -15px;">
         <div class="container-fluid">
-            <div class="col-sm-4">
+            {{-- Fitur upload matrix digantikan dengan set matrix url /v2/matrix --}}
+{{--             <div class="col-sm-4">
                 <a href="#" data-toggle="modal" data-target="#definematrix">
                     <div class="panel panel-1" style="background-color: #2b235a; color: white;">
                         <div class="panel-heading">
@@ -14,13 +15,13 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> --}}
             <div class="col-sm-4">
                 <a href="{{route('v1')}}">
                     <div class="panel panel-1" style="background-color: #2b235a; color: white;">
                         <div class="panel-heading">
                             <h2 style="text-align: center">Trial V1</h2>
-                            <p style="text-align: center"></p>
+                            <p style="text-align: center">Baca EPC</p>
                         </div>
                     </div>
                 </a>
@@ -29,8 +30,18 @@
                 <a href="{{route('v2')}}">
                     <div class="panel panel-1" style="background-color: #2b235a; color: white;">
                         <div class="panel-heading">
-                            <h2 style="text-align: center">Trial V2 (Matrix Kanban)</h2>
-                            <p style="text-align: center"></p>
+                            <h2 style="text-align: center">Trial V2</h2>
+                            <p style="text-align: center">Matrix Kanban</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-4">
+                <a href="#">
+                    <div class="panel panel-1" style="background-color: #2b235a; color: white;">
+                        <div class="panel-heading">
+                            <h2 style="text-align: center">Trial V3</h2>
+                            <p style="text-align: center">Validasi Kanban</p>
                         </div>
                     </div>
                 </a>

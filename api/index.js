@@ -99,9 +99,10 @@ async function poolingTag(gate, tag){
         var tagFilteredByPool = new Set();
         var hasilUpdateLog =
         tag.forEach(function (element) {
-            if (!tagPool.has(element)) {
-                tagPool.set(element, 30);
-                tagFilteredByPool.add(element);
+            datatag = JSON.parse(JSON.stringify(element));
+            if (!tagPool.has(datatag.tag)) {
+                tagPool.set(datatag.tag, 30);
+                tagFilteredByPool.add(datatag.tag);
             }
         });
         return [gate,[...tagFilteredByPool]];
@@ -119,7 +120,7 @@ async function updateDatabase ([gate, kanban]) {
         var tagok = ['000000000000000000000001'];
         var time = getDatetimeToday();
         var returndata;
-        //url /trial khusus untuk membaca semua kanban yang lewat gate, dengan TTL 30 detik tiap kanban
+        //url /trialv1 khusus untuk membaca semua kanban yang lewat gate, dengan TTL 30 detik tiap kanban
         //gate_id = 0 untuk gate trial
         if(gate == 'trialv1'){
             for (i=0;i<kanban.length;i++)
@@ -135,10 +136,13 @@ async function updateDatabase ([gate, kanban]) {
                 connection.query('update tag_v2 set status = 1 where epc = ?',[epc])
                 get_idtag(epc)
                 .then(function(data){
-                    console.log(epc)
                     get_trial(epc).then(function(trial){
-                        // console.log(trial[1])
-                         connection.query('insert into read_logs_v2 (created_at,id_tag_v2, epc, trial_number) values (?, ?, ?, ?)', [time,data[0], data[1], trial])
+                        try{
+                            // console.log(trial[1])
+                             connection.query('insert into read_logs_v2 (created_at,id_tag_v2, epc, trial_number) values (?, ?, ?, ?)', [time,data[0], data[1], trial])
+                        }catch(error){
+
+                        }
                     })
                    
                 })
