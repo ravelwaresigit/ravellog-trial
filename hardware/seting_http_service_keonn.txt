@@ -22,7 +22,7 @@ Format Data Keonn
  
  body+='{';
  body+='\"port\": \"'+ctx_tags[i].getAntenna()+'\",';
- body+='\"tag\": \"'+ctx_tags[i].getEPC()+'\",';
+ body+='\"tag\": \"'+ctx_tags[i].getEPC()+'\"';
  body+='}';
 
  if(i<ctx_tags.length - 1){
