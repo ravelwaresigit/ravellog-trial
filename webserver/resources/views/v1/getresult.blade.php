@@ -5,7 +5,11 @@
 	@if(empty($readkanban[0]))
 	@else
 		@foreach($readkanban as $kanban)
-		    <font style="font-size: 30px;"><span class="label label-success">{{$kanban->epc}}</span></font>
+		    <font style="font-size: 30px;">
+		    	@if($kanban->epc === 'sensor') <span class="label label-warning" style="margin-right: 0.5em"> {{$kanban->epc}} || <small> {{$kanban->created_at}} </small></span>
+		    	@else <span class="label label-success" style="margin-right: 0.5em"> {{$kanban->epc}} || <small> {{$kanban->created_at}} </small></span>
+		    	@endif
+		    </font>
 		@endforeach
 	@endif
 </div>

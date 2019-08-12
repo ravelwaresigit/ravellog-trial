@@ -26,6 +26,8 @@ Route::get('/','DashboardController@index');
 //Trial v1
 Route::get('/v1/result','V1Controller@showResult')->name('v1');
 Route::get('/v1/getresult','V1Controller@getResult');
+Route::post('/v1/settrialnumber','V1Controller@setTrialNumber');
+Route::get('/v1/downloadlog','V1Controller@downloadLogV1');
 
 //Trial v2
 Route::get('/v2/setmatrix','V2Controller@setMatrix')->name('v2');
