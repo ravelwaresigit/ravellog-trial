@@ -41,15 +41,23 @@ var server = http.createServer( async function (req, res) {
                 jason += data;
             });
             req.on('end', function () {
-                body = JSON.parse(jason);
-                readerMessageHandler(gate, body.ip, body.tags);
+                try {
+                    body = JSON.parse(jason);
+                    readerMessageHandler(gate, body.ip, body.tags)
+                } catch (e) {
+                    console.log('[HTTP] not JSON data received')
+                }
                 res.write('200');
                 res.end();
             });
+        }else{
+            console.log('Receive method',req.method,'from',url2);
+            res.write('200');
+            res.end();            
         }
     }
     else{
-        console.log('GET');
+        console.log('Receive method',req.method,'from',url2);
         res.write('200');
         res.end();
     }
@@ -148,21 +156,6 @@ async function updateDatabase ([gate, kanban]) {
                 })
             }
         }
-
-        // }else{
-        //     for (i=0;i<kanban.length;i++)
-        //     {
-        //         if (tagok.indexOf(kanban[i]) >= 0) {
-        //             console.log('ok '+kanban[i]);
-        //             connection.query('update boxes set updated_at = ?, gate_id = ? where kanban_id = ?', [time, gate, kanban[i]]);
-        //         } else {
-        //             console.log('er '+kanban[i]);
-        //             connection.query('update issues set updated_at = ? where kanban_id = ? and gate_id = ? and status = 1',[time, kanban[i], gate])
-        //         .then(connection.query('insert ignore into issues (kanban_id, gate_id, status, error_code, updated_at) values (?, ?, 1, 2, ?)', [kanban[i],gate,time]));
-            
-        //         }
-        //     }
-        // }
 
         return 'kanban masuk: '+kanban;
         // getGateFunction(gate, kanban).then(function (gate, kanban, status) { console.log(gate+' '+message+' '+status)});

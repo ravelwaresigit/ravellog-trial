@@ -103,14 +103,14 @@
                         Ravellog Trial
                     </a>
                 </li>
-                @if (Auth::guest())
+{{--                 @if (Auth::guest())
                     <li><a href="{{ route('login') }}">Login</a></li>
                 @else
                     <!-- for all user and admin, can view dashboard layout -->
                     <li class="sidebar-profile">
                         <a href="#">
                             <span class="glyphicon glyphicon-user"></span>
-                            {{-- </span>{{auth()->user()->name}} --}}
+                            </span>{{auth()->user()->name}}
                         </a>
                     </li>
                     <li class="sidebar-menu" style="padding-left: 1em;">
@@ -128,12 +128,14 @@
                         {{ csrf_field() }}
                     </form>
                 </li>
-                @endif
+                @endif --}}
+                @if(\Request::is('v2/*') )
                 <img style="padding-right: 3px; padding-left: 3px;" class="img img-responsive" src="{{asset('/img/img1-ravellogtrial.png')}}">
                 <br>
                 <img style="padding-right: 3px; padding-left: 3px;" class="img img-responsive" src="{{asset('/img/img2-ravellogtrial.png')}}">
                 <br>
                 <img style="padding-right: 3px; padding-left: 3px;" class="img img-responsive" src="{{asset('/img/img3-ravellogtrial.png')}}">
+                @endif
             </ul> 
         </div>
         <!-- /#sidebar-wrapper -->
