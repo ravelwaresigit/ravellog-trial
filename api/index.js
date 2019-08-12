@@ -33,8 +33,9 @@ var server = http.createServer( async function (req, res) {
         var urlnya = url.parse(req.url,true);
         var url2 = urlnya.pathname;
         var url3 = url2.split('/');
+        console.log('Hello', urlnya, url2, url3)
         var jason = '';
-        if (url3[1] == 'gate')
+        if (url3[1] == 'G')
         {
             var gate = url3[2];
             req.on('data', async function (data) {
@@ -50,7 +51,25 @@ var server = http.createServer( async function (req, res) {
                 res.write('200');
                 res.end();
             });
-        }else{
+        }else if(url3[1] == 'trigger'){
+            let jason = ''
+            req.on('data', async function (data) {
+                jason += data
+            })
+            req.on('end', function () {
+                // console.log('jason',jason)
+                var gate = url3[3];
+                console.log('[HTTP] trigger from sensor')
+                var kanban = ['sensor']
+                console.log(jason)
+                if(jason == '1'){
+                    updateDatabase([gate, kanban])
+                }
+                res.write('200')
+                res.end()
+            });
+        }
+        else{
             console.log('Receive method',req.method,'from',url2);
             res.write('200');
             res.end();            
@@ -120,20 +139,32 @@ async function poolingTag(gate, tag){
     }
 }
 
+
+
 //Update database
 var epc
 async function updateDatabase ([gate, kanban]) {
     try {
         //var tagok untuk mendefinisikan kanban in iyang sudah terdaftar di database
+        console.log(gate,kanban)
         var tagok = ['000000000000000000000001'];
         var time = getDatetimeToday();
         var returndata;
         //url /trialv1 khusus untuk membaca semua kanban yang lewat gate, dengan TTL 30 detik tiap kanban
         //gate_id = 0 untuk gate trial
-        if(gate == 'trialv1'){
+        // if(gate == 'trialv1'){
+        if(gate == '1'){    //buat sementara
             for (i=0;i<kanban.length;i++)
             {
-                connection.query('insert into read_logs_v1 (trial_number, epc, created_at) values (0, ?, ?)', [kanban[i], time]);
+                get_trial_number(kanban[i]).then(function(data){
+                    try{
+                        console.log(data)
+                        connection.query('insert into read_logs_v1 (trial_number, epc, created_at) values (?, ?, ?)', [data[0], data[1], time]);
+                    }catch(error){
+
+                    }
+                })
+                // console.log(kanban[i])
             }
         }
         else if(gate == 'trialv2'){
@@ -179,6 +210,17 @@ async function get_trial (epc) {
     try{
         var trial = await connection.query('SELECT trial_number FROM matrix WHERE id = 1');
         return trial[0].trial_number;
+    }
+    catch(error){
+
+    }
+
+}
+
+async function get_trial_number (epc) {
+    try{
+        var trial = await connection.query('SELECT trial_number FROM trial_v1 WHERE id = 1');
+        return [trial[0].trial_number,epc];
     }
     catch(error){
 
