@@ -6,7 +6,7 @@
   "dependencies": {
     "promise-mysql": "^3.3.1",
     "request": "^2.88.0",
-    "requestretry": "^3.1.0"
+    "requestretry": "^7.0.0"
   },
   "devDependencies": {},
   "scripts": {
